@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro de Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Sistema de Registro de Productos</h1>
+    </header>
+    <nav>
+        <a href="#" id="navInicio">Inicio</a>
+        <a href="#" id="navProductos">Productos</a>
+        <a href="#" id="navContacto">Contacto</a>
+    </nav>
+    <main>
+        <section id="registro">
+            <h1>Registrar Producto</h1>
+            <form id="formularioRegistro">
+                <label for="nombre">Nombre del Producto:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <label for="precio">Precio del Producto:</label>
+                <input type="number" id="precio" name="precio" required>
+                <button type="submit">Registrar</button>
+            </form>
+        </section>
+        <section id="productos" style="display: none;">
+            <h1>Productos Registrados</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="listaProductos">
+                    <!-- Productos registrados aparecerán aquí -->
+                </tbody>
+            </table>
+        </section>
+        <section id="factura">
+            <h1>Factura</h1>
+            <pre id="factura"></pre>
+        </section>
+        <section id="contacto" style="display: none;">
+            <h1>Contacto</h1>
+            <button id="generarNumeroCuenta">Generar Número de Cuenta</button>
+            <p id="numeroCuenta"></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Sistema de Registro de Productos. Todos los derechos reservados.</p>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>

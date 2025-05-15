@@ -1,3 +1,4 @@
+ // Clase para representar un producto
 class Producto {
     constructor(id, nombre, precio) {
         this.id = id;
@@ -6,6 +7,7 @@ class Producto {
     }
 }
 
+// Clase para manejar el carrito de compras
 class Carrito {
     constructor() {
         this.productos = [];
@@ -23,8 +25,14 @@ class Carrito {
         const total = this.productos.reduce((acc, producto) => acc + producto.precio, 0);
         document.getElementById('factura').innerText = `Factura:\n${factura}\n\nTotal: $${total.toFixed(2)}`;
     }
+
+    limpiarCarrito() {
+        this.productos = [];
+        this.generarFactura();
+    }
 }
 
+// Clase principal para manejar el sistema de registro de productos
 class SistemaRegistro {
     constructor() {
         this.productos = [];
@@ -34,11 +42,13 @@ class SistemaRegistro {
     }
 
     init() {
+        // Eventos para manejar el formulario de registro
         document.getElementById('formularioRegistro').addEventListener('submit', (event) => {
             event.preventDefault();
             this.registrarProducto();
         });
 
+        // Eventos para manejar la navegación
         document.getElementById('navInicio').addEventListener('click', () => {
             this.mostrarSeccion('factura');
         });
@@ -51,13 +61,14 @@ class SistemaRegistro {
             this.mostrarSeccion('contacto');
         });
 
+        // Evento para generar un número de cuenta aleatorio
         document.getElementById('generarNumeroCuenta').addEventListener('click', () => {
             this.generarNumeroCuenta();
         });
     }
 
     registrarProducto() {
-        const nombre = document.getElementById('nombre').value;
+        const nombre = document.getElementById('nombre').value.trim();
         const precio = parseFloat(document.getElementById('precio').value);
 
         if (nombre && !isNaN(precio) && precio >= 1 && precio <= 100000) {
@@ -66,7 +77,7 @@ class SistemaRegistro {
             this.actualizarListaProductos();
             document.getElementById('formularioRegistro').reset();
         } else {
-            alert('El precio debe estar entre 1 y 100,000 pesos.');
+            alert('El precio debe estar entre 1 y 100,000 pesos y el nombre no puede estar vacío.');
         }
     }
 
@@ -87,13 +98,20 @@ class SistemaRegistro {
 
     añadirAlCarrito(id) {
         const producto = this.productos.find(p => p.id === id);
-        this.carrito.añadirProducto(producto);
+        if (producto) {
+            this.carrito.añadirProducto(producto);
+        } else {
+            alert('Producto no encontrado.');
+        }
     }
 
     mostrarSeccion(seccion) {
-        document.getElementById('factura').style.display = 'none';
-        document.getElementById('productos').style.display = 'none';
-        document.getElementById('contacto').style.display = 'none';
+        // Oculta todas las secciones
+        ['factura', 'productos', 'contacto'].forEach(id => {
+            document.getElementById(id).style.display = 'none';
+        });
+
+        // Muestra la sección seleccionada
         document.getElementById(seccion).style.display = 'block';
     }
 
@@ -103,113 +121,5 @@ class SistemaRegistro {
     }
 }
 
-class Publicacion {
-    constructor(contenido) {
-        this.contenido = contenido;
-        this.fecha = new Date();
-    }
-}
-
-class Mensaje {
-    constructor(contenido) {
-        this.contenido = contenido;
-        this.fecha = new Date();
-    }
-}
-
-class RedSocial {
-    constructor() {
-        this.publicaciones = [];
-        this.mensajes = [];
-        this.init();
-    }
-
-    init() {
-        document.getElementById('formularioPublicacion').addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.publicar();
-        });
-
-        document.getElementById('formularioMensaje').addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.enviarMensaje();
-        });
-
-        document.getElementById('navInicio').addEventListener('click', () => {
-            this.mostrarSeccion('inicio');
-        });
-
-        document.getElementById('navPerfil').addEventListener('click', () => {
-            this.mostrarSeccion('perfil');
-        });
-
-        document.getElementById('navMensajes').addEventListener('click', () => {
-            this.mostrarSeccion('mensajes');
-        });
-
-        document.getElementById('editarPerfil').addEventListener('click', () => {
-            this.editarPerfil();
-        });
-    }
-
-    publicar() {
-        const contenido = document.getElementById('publicacion').value;
-        const nuevaPublicacion = new Publicacion(contenido);
-        this.publicaciones.push(nuevaPublicacion);
-        this.actualizarListaPublicaciones();
-        document.getElementById('formularioPublicacion').reset();
-    }
-
-    actualizarListaPublicaciones() {
-        const listaPublicaciones = document.getElementById('listaPublicaciones');
-        listaPublicaciones.innerHTML = '';
-        this.publicaciones.forEach(publicacion => {
-            const div = document.createElement('div');
-            div.className = 'publicacion';
-            div.innerHTML = `
-                <p>${publicacion.contenido}</p>
-                <small>${publicacion.fecha.toLocaleString()}</small>
-            `;
-            listaPublicaciones.appendChild(div);
-        });
-    }
-
-    enviarMensaje() {
-        const contenido = document.getElementById('mensaje').value;
-        const nuevoMensaje = new Mensaje(contenido);
-        this.mensajes.push(nuevoMensaje);
-        this.actualizarListaMensajes();
-        document.getElementById('formularioMensaje').reset();
-    }
-
-    actualizarListaMensajes() {
-        const listaMensajes = document.getElementById('listaMensajes');
-        listaMensajes.innerHTML = '';
-        this.mensajes.forEach(mensaje => {
-            const div = document.createElement('div');
-            div.className = 'mensaje';
-            div.innerHTML = `
-                <p>${mensaje.contenido}</p>
-                <small>${mensaje.fecha.toLocaleString()}</small>
-            `;
-            listaMensajes.appendChild(div);
-        });
-    }
-
-    mostrarSeccion(seccion) {
-        document.getElementById('inicio').style.display = 'none';
-        document.getElementById('perfil').style.display = 'none';
-        document.getElementById('mensajes').style.display = 'none';
-        document.getElementById(seccion).style.display = 'block';
-    }
-
-    editarPerfil() {
-        const nuevoNombre = prompt('Ingrese su nuevo nombre:');
-        if (nuevoNombre) {
-            document.getElementById('nombrePerfil').innerText = nuevoNombre;
-        }
-    }
-}
-
+// Inicializa el sistema de registro
 const sistemaRegistro = new SistemaRegistro();
-const redSocial = new RedSocial();

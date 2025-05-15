@@ -10,11 +10,18 @@ class Producto {
 // Clase para manejar el carrito de compras
 class Carrito {
     constructor() {
-        this.productos = [];
+        this.productos = JSON.parse(localStorage.getItem('carrito')) || [];
     }
 
     añadirProducto(producto) {
         this.productos.push(producto);
+        this.guardarCarrito();
+        this.generarFactura();
+    }
+
+    eliminarProducto(id) {
+        this.productos = this.productos.filter(producto => producto.id !== id);
+        this.guardarCarrito();
         this.generarFactura();
     }
 
@@ -28,16 +35,21 @@ class Carrito {
 
     limpiarCarrito() {
         this.productos = [];
+        this.guardarCarrito();
         this.generarFactura();
+    }
+
+    guardarCarrito() {
+        localStorage.setItem('carrito', JSON.stringify(this.productos));
     }
 }
 
 // Clase principal para manejar el sistema de registro de productos
 class SistemaRegistro {
     constructor() {
-        this.productos = [];
+        this.productos = JSON.parse(localStorage.getItem('productos')) || [];
         this.carrito = new Carrito();
-        this.idProducto = 1;
+        this.idProducto = this.productos.length ? this.productos[this.productos.length - 1].id + 1 : 1;
         this.init();
     }
 
@@ -65,6 +77,10 @@ class SistemaRegistro {
         document.getElementById('generarNumeroCuenta').addEventListener('click', () => {
             this.generarNumeroCuenta();
         });
+
+        // Cargar productos y carrito al iniciar
+        this.actualizarListaProductos();
+        this.carrito.generarFactura();
     }
 
     registrarProducto() {
@@ -74,6 +90,7 @@ class SistemaRegistro {
         if (nombre && !isNaN(precio) && precio >= 1 && precio <= 100000) {
             const nuevoProducto = new Producto(this.idProducto++, nombre, precio);
             this.productos.push(nuevoProducto);
+            this.guardarProductos();
             this.actualizarListaProductos();
             document.getElementById('formularioRegistro').reset();
         } else {
@@ -90,7 +107,9 @@ class SistemaRegistro {
                 <td>${producto.id}</td>
                 <td>${producto.nombre}</td>
                 <td>$${producto.precio.toFixed(2)}</td>
-                <td><button onclick="sistemaRegistro.añadirAlCarrito(${producto.id})">Añadir</button></td>
+                <td>
+                    <button onclick="sistemaRegistro.añadirAlCarrito(${producto.id})">Añadir</button>
+                </td>
             `;
             listaProductos.appendChild(fila);
         });
@@ -118,6 +137,10 @@ class SistemaRegistro {
     generarNumeroCuenta() {
         const numeroCuenta = Math.floor(Math.random() * 1000000000);
         document.getElementById('numeroCuenta').innerText = `Número de Cuenta: ${numeroCuenta}`;
+    }
+
+    guardarProductos() {
+        localStorage.setItem('productos', JSON.stringify(this.productos));
     }
 }
 

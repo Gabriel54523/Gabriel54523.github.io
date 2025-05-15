@@ -14,7 +14,12 @@ class Carrito {
     }
 
     añadirProducto(producto) {
-        this.productos.push(producto);
+        const existente = this.productos.find(p => p.id === producto.id);
+        if (existente) {
+            alert('El producto ya está en el carrito.');
+        } else {
+            this.productos.push(producto);
+        }
         this.guardarCarrito();
         this.generarFactura();
     }
@@ -26,6 +31,11 @@ class Carrito {
     }
 
     generarFactura() {
+        if (this.productos.length === 0) {
+            document.getElementById('factura').innerText = 'El carrito está vacío. Agrega productos para generar una factura.';
+            return;
+        }
+
         const factura = this.productos.map(producto => {
             return `Producto: ${producto.nombre}, Precio: $${producto.precio.toFixed(2)}`;
         }).join('\n');
@@ -60,47 +70,42 @@ class SistemaRegistro {
             this.registrarProducto();
         });
 
-        // Eventos para manejar la navegación
-        document.getElementById('navInicio').addEventListener('click', () => {
-            this.mostrarSeccion('factura');
-        });
-
-        document.getElementById('navProductos').addEventListener('click', () => {
-            this.mostrarSeccion('productos');
-        });
-
-        document.getElementById('navContacto').addEventListener('click', () => {
-            this.mostrarSeccion('contacto');
-        });
-
-        // Evento para generar un número de cuenta aleatorio
-        document.getElementById('generarNumeroCuenta').addEventListener('click', () => {
-            this.generarNumeroCuenta();
+        // Evento para vaciar el carrito
+        document.getElementById('vaciarCarrito').addEventListener('click', () => {
+            this.carrito.limpiarCarrito();
         });
 
         // Cargar productos y carrito al iniciar
         this.actualizarListaProductos();
         this.carrito.generarFactura();
+        this.mostrarEstadisticas();
     }
 
     registrarProducto() {
         const nombre = document.getElementById('nombre').value.trim();
         const precio = parseFloat(document.getElementById('precio').value);
 
-        if (nombre && !isNaN(precio) && precio >= 1 && precio <= 100000) {
+        if (nombre && !isNaN(precio) && precio > 0) {
             const nuevoProducto = new Producto(this.idProducto++, nombre, precio);
             this.productos.push(nuevoProducto);
             this.guardarProductos();
             this.actualizarListaProductos();
+            this.mostrarEstadisticas();
             document.getElementById('formularioRegistro').reset();
         } else {
-            alert('El precio debe estar entre 1 y 100,000 pesos y el nombre no puede estar vacío.');
+            alert('Todos los campos son obligatorios y deben tener valores válidos.');
         }
     }
 
     actualizarListaProductos() {
         const listaProductos = document.getElementById('listaProductos');
         listaProductos.innerHTML = '';
+
+        if (this.productos.length === 0) {
+            listaProductos.innerHTML = '<tr><td colspan="5">No hay productos registrados.</td></tr>';
+            return;
+        }
+
         this.productos.forEach(producto => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
@@ -108,11 +113,40 @@ class SistemaRegistro {
                 <td>${producto.nombre}</td>
                 <td>$${producto.precio.toFixed(2)}</td>
                 <td>
-                    <button onclick="sistemaRegistro.añadirAlCarrito(${producto.id})">Añadir</button>
+                    <button onclick="sistemaRegistro.editarProducto(${producto.id})">Editar</button>
+                    <button onclick="sistemaRegistro.eliminarProducto(${producto.id})">Eliminar</button>
+                    <button onclick="sistemaRegistro.añadirAlCarrito(${producto.id})">Añadir al Carrito</button>
                 </td>
             `;
             listaProductos.appendChild(fila);
         });
+    }
+
+    editarProducto(id) {
+        const producto = this.productos.find(p => p.id === id);
+        if (producto) {
+            const nuevoNombre = prompt('Nuevo nombre del producto:', producto.nombre);
+            const nuevoPrecio = parseFloat(prompt('Nuevo precio del producto:', producto.precio));
+
+            if (nuevoNombre && !isNaN(nuevoPrecio) && nuevoPrecio > 0) {
+                producto.nombre = nuevoNombre;
+                producto.precio = nuevoPrecio;
+                this.guardarProductos();
+                this.actualizarListaProductos();
+                this.mostrarEstadisticas();
+            } else {
+                alert('Datos inválidos. No se realizaron cambios.');
+            }
+        } else {
+            alert('Producto no encontrado.');
+        }
+    }
+
+    eliminarProducto(id) {
+        this.productos = this.productos.filter(producto => producto.id !== id);
+        this.guardarProductos();
+        this.actualizarListaProductos();
+        this.mostrarEstadisticas();
     }
 
     añadirAlCarrito(id) {
@@ -124,19 +158,10 @@ class SistemaRegistro {
         }
     }
 
-    mostrarSeccion(seccion) {
-        // Oculta todas las secciones
-        ['factura', 'productos', 'contacto'].forEach(id => {
-            document.getElementById(id).style.display = 'none';
-        });
-
-        // Muestra la sección seleccionada
-        document.getElementById(seccion).style.display = 'block';
-    }
-
-    generarNumeroCuenta() {
-        const numeroCuenta = Math.floor(Math.random() * 1000000000);
-        document.getElementById('numeroCuenta').innerText = `Número de Cuenta: ${numeroCuenta}`;
+    mostrarEstadisticas() {
+        const totalProductos = this.productos.length;
+        const valorInventario = this.productos.reduce((acc, producto) => acc + producto.precio, 0);
+        document.getElementById('estadisticas').innerText = `Total de productos: ${totalProductos}, Valor total del inventario: $${valorInventario.toFixed(2)}`;
     }
 
     guardarProductos() {

@@ -1,9 +1,10 @@
  // Clase para representar un producto
 class Producto {
-    constructor(id, nombre, precio) {
+    constructor(id, nombre, precio, cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
 }
 
@@ -13,12 +14,12 @@ class Carrito {
         this.productos = JSON.parse(localStorage.getItem('carrito')) || [];
     }
 
-    añadirProducto(producto) {
+    añadirProducto(producto, cantidad) {
         const existente = this.productos.find(p => p.id === producto.id);
         if (existente) {
-            alert('El producto ya está en el carrito.');
+            existente.cantidad += cantidad;
         } else {
-            this.productos.push(producto);
+            this.productos.push({ ...producto, cantidad });
         }
         this.guardarCarrito();
         this.generarFactura();
@@ -37,10 +38,15 @@ class Carrito {
         }
 
         const factura = this.productos.map(producto => {
-            return `Producto: ${producto.nombre}, Precio: $${producto.precio.toFixed(2)}`;
+            const subtotal = producto.precio * producto.cantidad;
+            return `Producto: ${producto.nombre}, Cantidad: ${producto.cantidad}, Precio: $${producto.precio.toFixed(2)}, Subtotal: $${subtotal.toFixed(2)}`;
         }).join('\n');
-        const total = this.productos.reduce((acc, producto) => acc + producto.precio, 0);
-        document.getElementById('factura').innerText = `Factura:\n${factura}\n\nTotal: $${total.toFixed(2)}`;
+
+        const total = this.productos.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
+        const iva = total * 0.16; // 16% de IVA
+        const totalConIva = total + iva;
+
+        document.getElementById('factura').innerText = `Factura:\n${factura}\n\nTotal: $${total.toFixed(2)}\nIVA (16%): $${iva.toFixed(2)}\nTotal con IVA: $${totalConIva.toFixed(2)}`;
     }
 
     limpiarCarrito() {
@@ -60,6 +66,7 @@ class SistemaRegistro {
         this.productos = JSON.parse(localStorage.getItem('productos')) || [];
         this.carrito = new Carrito();
         this.idProducto = this.productos.length ? this.productos[this.productos.length - 1].id + 1 : 1;
+        this.ventasTotales = JSON.parse(localStorage.getItem('ventasTotales')) || 0;
         this.init();
     }
 
@@ -84,9 +91,16 @@ class SistemaRegistro {
     registrarProducto() {
         const nombre = document.getElementById('nombre').value.trim();
         const precio = parseFloat(document.getElementById('precio').value);
+        const cantidad = parseInt(document.getElementById('cantidad').value);
 
-        if (nombre && !isNaN(precio) && precio > 0) {
-            const nuevoProducto = new Producto(this.idProducto++, nombre, precio);
+        if (nombre && !isNaN(precio) && precio > 0 && !isNaN(cantidad) && cantidad > 0) {
+            const existente = this.productos.find(p => p.nombre.toLowerCase() === nombre.toLowerCase());
+            if (existente) {
+                alert('El producto ya existe. Puedes editarlo si deseas cambiar sus detalles.');
+                return;
+            }
+
+            const nuevoProducto = new Producto(this.idProducto++, nombre, precio, cantidad);
             this.productos.push(nuevoProducto);
             this.guardarProductos();
             this.actualizarListaProductos();
@@ -112,6 +126,7 @@ class SistemaRegistro {
                 <td>${producto.id}</td>
                 <td>${producto.nombre}</td>
                 <td>$${producto.precio.toFixed(2)}</td>
+                <td>${producto.cantidad}</td>
                 <td>
                     <button onclick="sistemaRegistro.editarProducto(${producto.id})">Editar</button>
                     <button onclick="sistemaRegistro.eliminarProducto(${producto.id})">Eliminar</button>
@@ -127,10 +142,12 @@ class SistemaRegistro {
         if (producto) {
             const nuevoNombre = prompt('Nuevo nombre del producto:', producto.nombre);
             const nuevoPrecio = parseFloat(prompt('Nuevo precio del producto:', producto.precio));
+            const nuevaCantidad = parseInt(prompt('Nueva cantidad del producto:', producto.cantidad));
 
-            if (nuevoNombre && !isNaN(nuevoPrecio) && nuevoPrecio > 0) {
+            if (nuevoNombre && !isNaN(nuevoPrecio) && nuevoPrecio > 0 && !isNaN(nuevaCantidad) && nuevaCantidad > 0) {
                 producto.nombre = nuevoNombre;
                 producto.precio = nuevoPrecio;
+                producto.cantidad = nuevaCantidad;
                 this.guardarProductos();
                 this.actualizarListaProductos();
                 this.mostrarEstadisticas();
@@ -152,7 +169,16 @@ class SistemaRegistro {
     añadirAlCarrito(id) {
         const producto = this.productos.find(p => p.id === id);
         if (producto) {
-            this.carrito.añadirProducto(producto);
+            const cantidad = parseInt(prompt('Cantidad a añadir al carrito:', 1));
+            if (!isNaN(cantidad) && cantidad > 0 && cantidad <= producto.cantidad) {
+                producto.cantidad -= cantidad;
+                this.carrito.añadirProducto(producto, cantidad);
+                this.guardarProductos();
+                this.actualizarListaProductos();
+                this.mostrarEstadisticas();
+            } else {
+                alert('Cantidad inválida o insuficiente en el inventario.');
+            }
         } else {
             alert('Producto no encontrado.');
         }
@@ -160,8 +186,8 @@ class SistemaRegistro {
 
     mostrarEstadisticas() {
         const totalProductos = this.productos.length;
-        const valorInventario = this.productos.reduce((acc, producto) => acc + producto.precio, 0);
-        document.getElementById('estadisticas').innerText = `Total de productos: ${totalProductos}, Valor total del inventario: $${valorInventario.toFixed(2)}`;
+        const valorInventario = this.productos.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
+        document.getElementById('estadisticas').innerText = `Total de productos: ${totalProductos}, Valor total del inventario: $${valorInventario.toFixed(2)}, Ventas totales: $${this.ventasTotales.toFixed(2)}`;
     }
 
     guardarProductos() {

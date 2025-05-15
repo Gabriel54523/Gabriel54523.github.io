@@ -3,7 +3,7 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #f4f4f9;
     color: #333;
 }
 
@@ -18,7 +18,7 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 /* Contenedor principal */
@@ -74,18 +74,21 @@ form button:hover {
 
 .noticia {
     background-color: white;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .noticia h3 {
     margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    color: #007bff;
 }
 
 .noticia p {
     margin: 0.5rem 0;
+    line-height: 1.6;
 }
 
 .noticia .fecha {

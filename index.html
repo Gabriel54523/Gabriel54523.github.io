@@ -1,71 +1,148 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticias Globales</title>
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      max-width: 500px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+
+    nav {
+      background-color: #333;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav button {
+      background-color: #444;
+      color: white;
+      border: none;
+      margin: 0 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .news-section {
+      display: none;
+      padding: 20px;
+    }
+
+    .news-section.active {
+      display: block;
+    }
+
+    .news-card {
+      background-color: white;
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-card iframe {
+      width: 100%;
+      height: 250px;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #1a1a1a;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <header>
-    <h1>Noticias Globales</h1>
-    <input type="text" id="searchBar" placeholder="Buscar noticias..." />
-  </header>
+<header>
+  <h1>Noticias Globales</h1>
+  <form action="https://www.google.com/search" method="GET" target="_blank">
+    <input type="text" name="q" placeholder="Buscar noticias en la web..." />
+  </form>
+</header>
 
-  <nav>
-    <ul>
-      <li><a href="#internacional">Internacional</a></li>
-      <li><a href="#tecnologia">Tecnología</a></li>
-      <li><a href="#deportes">Deportes</a></li>
-      <li><a href="#cultura">Cultura</a></li>
-    </ul>
-  </nav>
+<nav>
+  <button onclick="toggleSection('internacional')">Internacional</button>
+  <button onclick="toggleSection('tecnologia')">Tecnología</button>
+  <button onclick="toggleSection('deportes')">Deportes</button>
+  <button onclick="toggleSection('cultura')">Cultura</button>
+</nav>
 
-  <main>
+<main>
+  <section id="internacional" class="news-section">
+    <h2>Internacional</h2>
+    <article class="news-card">
+      <h3>Conflicto en Europa</h3>
+      <p>Últimos acontecimientos sobre la crisis internacional...</p>
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </section>
 
-    <section id="internacional" class="news-section">
-      <h2>Internacional</h2>
-      <article class="news-card">
-        <h3>Conflicto en Europa</h3>
-        <p>Últimos acontecimientos sobre la crisis internacional...</p>
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-      </article>
-    </section>
+  <section id="tecnologia" class="news-section">
+    <h2>Tecnología</h2>
+    <article class="news-card">
+      <h3>Nuevo avance en IA</h3>
+      <p>Una nueva IA está cambiando el mundo tecnológico...</p>
+      <iframe src="https://www.youtube.com/embed/fJ9rUzIMcZQ" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </section>
 
-    <section id="tecnologia" class="news-section">
-      <h2>Tecnología</h2>
-      <article class="news-card">
-        <h3>Nuevo avance en IA</h3>
-        <p>Una nueva IA está cambiando el mundo tecnológico...</p>
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
-      </article>
-    </section>
+  <section id="deportes" class="news-section">
+    <h2>Deportes</h2>
+    <article class="news-card">
+      <h3>Final de la Champions</h3>
+      <p>Resumen y goles del partido final...</p>
+      <iframe src="https://www.youtube.com/embed/J---aiyznGQ" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </section>
 
-    <section id="deportes" class="news-section">
-      <h2>Deportes</h2>
-      <article class="news-card">
-        <h3>Final de la Champions</h3>
-        <p>Resumen y goles del partido final...</p>
-        <iframe src="https://www.youtube.com/embed/J---aiyznGQ" frameborder="0" allowfullscreen></iframe>
-      </article>
-    </section>
+  <section id="cultura" class="news-section">
+    <h2>Cultura</h2>
+    <article class="news-card">
+      <h3>Festival de Cine 2025</h3>
+      <p>Las mejores películas del festival este año...</p>
+      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </section>
+</main>
 
-    <section id="cultura" class="news-section">
-      <h2>Cultura</h2>
-      <article class="news-card">
-        <h3>Festival de Cine 2025</h3>
-        <p>Las mejores películas del festival este año...</p>
-        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
-      </article>
-    </section>
+<footer>
+  <p>&copy; 2025 Noticias Globales. Todos los derechos reservados.</p>
+</footer>
 
-  </main>
+<script>
+  function toggleSection(id) {
+    const sections = document.querySelectorAll('.news-section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
 
-  <footer>
-    <p>&copy; 2025 Noticias Globales. Todos los derechos reservados.</p>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

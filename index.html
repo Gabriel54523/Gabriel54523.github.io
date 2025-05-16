@@ -1,38 +1,71 @@
  <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Noticias</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Noticias Globales</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Página de Noticias</h1>
-    </header>
-    <main class="container">
-        <section id="formulario">
-            <h2>Agregar Noticia</h2>
-            <form id="formularioNoticia">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required>
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" required></textarea>
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
-                <button type="submit">Agregar Noticia</button>
-            </form>
-        </section>
-        <section id="noticias">
-            <h2>Noticias</h2>
-            <div id="listaNoticias">
-                <!-- Las noticias aparecerán aquí -->
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 Página de Noticias. Todos los derechos reservados.</p>
-    </footer>
-    <script src="app.js"></script>
+
+  <header>
+    <h1>Noticias Globales</h1>
+    <input type="text" id="searchBar" placeholder="Buscar noticias..." />
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#internacional">Internacional</a></li>
+      <li><a href="#tecnologia">Tecnología</a></li>
+      <li><a href="#deportes">Deportes</a></li>
+      <li><a href="#cultura">Cultura</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section id="internacional" class="news-section">
+      <h2>Internacional</h2>
+      <article class="news-card">
+        <h3>Conflicto en Europa</h3>
+        <p>Últimos acontecimientos sobre la crisis internacional...</p>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </article>
+    </section>
+
+    <section id="tecnologia" class="news-section">
+      <h2>Tecnología</h2>
+      <article class="news-card">
+        <h3>Nuevo avance en IA</h3>
+        <p>Una nueva IA está cambiando el mundo tecnológico...</p>
+        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
+      </article>
+    </section>
+
+    <section id="deportes" class="news-section">
+      <h2>Deportes</h2>
+      <article class="news-card">
+        <h3>Final de la Champions</h3>
+        <p>Resumen y goles del partido final...</p>
+        <iframe src="https://www.youtube.com/embed/J---aiyznGQ" frameborder="0" allowfullscreen></iframe>
+      </article>
+    </section>
+
+    <section id="cultura" class="news-section">
+      <h2>Cultura</h2>
+      <article class="news-card">
+        <h3>Festival de Cine 2025</h3>
+        <p>Las mejores películas del festival este año...</p>
+        <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
+      </article>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Noticias Globales. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

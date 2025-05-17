@@ -1,160 +1,53 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias Globales</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
-    header input[type="text"] {
-      padding: 10px;
-      width: 60%;
-      max-width: 500px;
-      border-radius: 5px;
-      border: none;
-      font-size: 16px;
-    }
-
-    nav {
-      background-color: #333;
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-    }
-
-    nav button {
-      background-color: #444;
-      color: white;
-      border: none;
-      margin: 0 10px;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-
-    .news-section {
-      display: none;
-      padding: 20px;
-    }
-
-    .news-section.active {
-      display: block;
-    }
-
-    .news-card {
-      background-color: white;
-      margin: 15px 0;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .news-card iframe {
-      width: 100%;
-      height: 250px;
-      margin-top: 10px;
-      border-radius: 6px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px;
-      background-color: #1a1a1a;
-      color: white;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgroScan - Bienvenido</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-green-50 text-gray-800 font-sans">
 
-<header>
-  <h1>Noticias Globales</h1>
-  <form action="https://www.google.com/search" method="GET" target="_blank">
-    <input type="text" name="q" placeholder="Buscar noticias en la web..." />
-  </form>
-</header>
+  <div class="flex flex-col items-center justify-center h-screen px-4">
+    <h1 class="text-4xl font-bold text-green-700 mb-4">🌱 AgroScan</h1>
+    <p class="text-lg mb-6 text-center">Detecta la roya del café y protege tus cultivos con inteligencia.</p>
 
-<nav>
-  <button onclick="toggleSection('canal')">Mi Canal</button>
-  <button onclick="toggleSection('internacional')">Internacional</button>
-  <button onclick="toggleSection('tecnologia')">Tecnología</button>
-  <button onclick="toggleSection('deportes')">Deportes</button>
-  <button onclick="toggleSection('cultura')">Cultura</button>
-</nav>
+    <div class="w-full max-w-sm bg-white p-6 rounded-xl shadow-md">
+      <h2 class="text-xl font-semibold text-center mb-4">Iniciar sesión</h2>
+      <form id="loginForm" class="flex flex-col gap-4">
+        <input
+          type="tel"
+          id="phoneNumber"
+          placeholder="Número de celular (+57...)"
+          class="border border-gray-300 p-2 rounded"
+          required
+        />
+        <div id="recaptcha-container" class="mb-2"></div>
+        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 rounded">
+          Enviar código SMS
+        </button>
+      </form>
+      <div id="verificationCodeContainer" class="hidden mt-4">
+        <input
+          type="text"
+          id="verificationCode"
+          placeholder="Código de verificación"
+          class="border border-gray-300 p-2 rounded w-full"
+        />
+        <button onclick="verifyCode()" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded w-full">
+          Verificar
+        </button>
+      </div>
+    </div>
+  </div>
 
-<main>
-  <section id="internacional" class="news-section">
-    <h2>Internacional</h2>
-    <article class="news-card">
-      <h3>Conflicto en Europa</h3>
-      <p>Últimos acontecimientos sobre la crisis internacional...</p>
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-    </article>
-  </section>
-
-  <section id="tecnologia" class="news-section">
-    <h2>Tecnología</h2>
-    <article class="news-card">
-      <h3>Nuevo avance en IA</h3>
-      <p>Una nueva IA está cambiando el mundo tecnológico...</p>
-      <iframe src="https://www.youtube.com/embed/fJ9rUzIMcZQ" frameborder="0" allowfullscreen></iframe>
-    </article>
-  </section>
-
-  <section id="deportes" class="news-section">
-    <h2>Deportes</h2>
-    <article class="news-card">
-      <h3>Final de la Champions</h3>
-      <p>Resumen y goles del partido final...</p>
-      <iframe src="https://www.youtube.com/embed/J---aiyznGQ" frameborder="0" allowfullscreen></iframe>
-    </article>
-  </section>
-
-  <section id="cultura" class="news-section">
-    <h2>Cultura</h2>
-    <article class="news-card">
-      <h3>Festival de Cine 2025</h3>
-      <p>Las mejores películas del festival este año...</p>
-      <iframe src="https://www.youtube.com/embed/ScMzIvxBSi4" frameborder="0" allowfullscreen></iframe>
-    </article>
-  </section>
-  <section id="canal" class="news-section">
-  <h2>Mi Canal de YouTube</h2>
-  <article class="news-card">
-    <h3>Últimos videos del canal</h3>
-    <p>Disfruta los contenidos más recientes de nuestro canal oficial:</p>
-    <!-- Reemplaza el enlace con tu canal o video -->
-    <iframe src="https://www.youtube.com/channel/UCzZ8FHfoo77lWcCC4Uu2lIg" frameborder="0" allowfullscreen></iframe>
-    <p><a href="https://www.youtube.com/watch?v=AuC87RGGTpY" target="_blank">Visita el canal completo aquí</a></p>
-  </article>
-</section>
-
-</main>
-
-<footer>
-  <p>&copy; 2025 Noticias Globales. Todos los derechos reservados.</p>
-</footer>
-
-<script>
-  function toggleSection(id) {
-    const sections = document.querySelectorAll('.news-section');
-    sections.forEach(section => section.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-</script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js"></script>
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
+<!-- Cargar Firebase -->
+<script type="module" src="firebase.js"></script>
 
 </body>
 </html>

@@ -3,51 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AgroScan - Bienvenido</title>
+  <title>Tienda Online - Productos</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-green-50 text-gray-800 font-sans">
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-  <div class="flex flex-col items-center justify-center h-screen px-4">
-    <h1 class="text-4xl font-bold text-green-700 mb-4">🌱 AgroScan</h1>
-    <p class="text-lg mb-6 text-center">Detecta la roya del café y protege tus cultivos con inteligencia.</p>
+  <header class="bg-blue-700 text-white py-6 mb-6 shadow">
+    <h1 class="text-3xl font-bold text-center">🛒 Tienda Online - Productos</h1>
+  </header>
 
-    <div class="w-full max-w-sm bg-white p-6 rounded-xl shadow-md">
-      <h2 class="text-xl font-semibold text-center mb-4">Iniciar sesión</h2>
-      <form id="loginForm" class="flex flex-col gap-4">
-        <input
-          type="tel"
-          id="phoneNumber"
-          placeholder="Número de celular (+57...)"
-          class="border border-gray-300 p-2 rounded"
-          required
-        />
-        <div id="recaptcha-container" class="mb-2"></div>
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white py-2 rounded">
-          Enviar código SMS
-        </button>
+  <div class="flex max-w-7xl mx-auto">
+    <!-- Contenido principal -->
+    <main class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+      <!-- Sección 1 -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4 text-blue-700">Electrónica</h2>
+        <div id="productos-electronica"></div>
+      </section>
+      <!-- Sección 2 -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4 text-green-700">Hogar</h2>
+        <div id="productos-hogar"></div>
+      </section>
+      <!-- Sección 3 -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4 text-pink-700">Moda</h2>
+        <div id="productos-moda"></div>
+      </section>
+    </main>
+
+    <!-- Barra lateral de herramientas -->
+    <aside class="min-w-[270px] max-w-xs bg-gray-100 border-l-2 border-gray-200 p-6 sticky top-0 h-screen shadow-md ml-4">
+      <div class="font-bold text-blue-700 mb-4 text-lg">Herramientas</div>
+      <form id="formAgregarProducto" class="mb-6">
+        <label for="nombre" class="font-semibold">Nombre:</label>
+        <input id="nombre" type="text" class="w-full border rounded p-2 mb-2" required>
+        <label for="precio" class="font-semibold">Precio:</label>
+        <input id="precio" type="number" class="w-full border rounded p-2 mb-2" required>
+        <label for="categoria" class="font-semibold">Categoría:</label>
+        <select id="categoria" class="w-full border rounded p-2 mb-2" required>
+          <option value="electronica">Electrónica</option>
+          <option value="hogar">Hogar</option>
+          <option value="moda">Moda</option>
+        </select>
+        <label for="imagen" class="font-semibold">Imagen:</label>
+        <input id="imagen" type="file" accept="image/*" class="w-full mb-2">
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">Agregar Producto</button>
       </form>
-      <div id="verificationCodeContainer" class="hidden mt-4">
-        <input
-          type="text"
-          id="verificationCode"
-          placeholder="Código de verificación"
-          class="border border-gray-300 p-2 rounded w-full"
-        />
-        <button onclick="verifyCode()" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded w-full">
-          Verificar
-        </button>
+      <div>
+        <p class="font-semibold mb-2">Editar precio de producto:</p>
+        <input id="editId" type="number" placeholder="ID producto" class="w-full border rounded p-2 mb-2">
+        <input id="editPrecio" type="number" placeholder="Nuevo precio" class="w-full border rounded p-2 mb-2">
+        <button type="button" onclick="editarPrecio()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded">Editar Precio</button>
       </div>
-    </div>
+    </aside>
   </div>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js"></script>
-  <script src="firebase.js"></script>
-  <script src="script.js"></script>
-<!-- Cargar Firebase -->
-<script type="module" src="firebase.js"></script>
-
+  <script src="app.js"></script>
 </body>
 </html>

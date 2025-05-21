@@ -95,3 +95,110 @@ function editarPrecio() {
   }
 }
 window.editarPrecio = editarPrecio;
+
+// ...existing code...
+
+// Carrito y ventas
+let carrito = [];
+let ventas = [];
+
+// Agregar al carrito desde cada producto
+function agregarAlCarrito(id, categoria) {
+  const prod = productos[categoria].find(p => p.id === id);
+  if (prod) {
+    carrito.push({...prod, categoria});
+    alert("Producto agregado al carrito.");
+  }
+}
+
+// Renderizar productos con botón "Agregar al carrito"
+function renderProductos() {
+  for (const cat in productos) {
+    const cont = document.getElementById('productos-' + cat);
+    cont.innerHTML = '';
+    productos[cat].forEach(prod => {
+      cont.innerHTML += `
+        <div class="bg-white rounded-lg shadow p-3 mb-4 flex flex-col items-center">
+          <img src="${prod.img || 'https://via.placeholder.com/150?text=Imagen'}" class="w-full h-32 object-cover rounded mb-2" id="img-${prod.id}">
+          <div class="font-bold">${prod.nombre}</div>
+          <div class="text-green-700 font-semibold mb-2">$${prod.precio}</div>
+          <div class="text-xs text-gray-400 mb-2">ID: ${prod.id}</div>
+          <button onclick="agregarAlCarrito(${prod.id}, '${cat}')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded mt-2">Agregar al carrito</button>
+        </div>
+      `;
+    });
+  }
+}
+renderProductos();
+
+// Modal carrito
+function verCarrito() {
+  const modal = document.getElementById('modalCarrito');
+  const cont = document.getElementById('carritoContenido');
+  if (carrito.length === 0) {
+    cont.innerHTML = "<p class='text-gray-500'>El carrito está vacío.</p>";
+  } else {
+    cont.innerHTML = carrito.map((item, i) =>
+      `<div class="mb-2 flex justify-between items-center">
+        <span>${item.nombre} (${item.categoria}) - $${item.precio}</span>
+        <button onclick="quitarDelCarrito(${i})" class="text-red-600 ml-2">Quitar</button>
+      </div>`
+    ).join('') +
+    `<button onclick="finalizarCompra()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded mt-4 w-full">Finalizar compra</button>`;
+  }
+  modal.classList.remove('hidden');
+}
+function cerrarCarrito() {
+  document.getElementById('modalCarrito').classList.add('hidden');
+}
+function quitarDelCarrito(idx) {
+  carrito.splice(idx, 1);
+  verCarrito();
+}
+
+// Finalizar compra
+function finalizarCompra() {
+  if (carrito.length === 0) return;
+  const metodo = document.getElementById('metodoPago').value;
+  ventas.push({
+    productos: [...carrito],
+    metodo,
+    fecha: new Date().toLocaleString()
+  });
+  carrito = [];
+  cerrarCarrito();
+  alert("¡Compra realizada con " + metodo + "!");
+}
+
+// Modal ventas
+function verVentas() {
+  const modal = document.getElementById('modalVentas');
+  const cont = document.getElementById('ventasContenido');
+  if (ventas.length === 0) {
+    cont.innerHTML = "<p class='text-gray-500'>No hay ventas registradas.</p>";
+  } else {
+    cont.innerHTML = ventas.map(v =>
+      `<div class="mb-3 border-b pb-2">
+        <div class="font-semibold">Fecha: ${v.fecha}</div>
+        <div>Método: ${v.metodo}</div>
+        <ul class="list-disc ml-5">
+          ${v.productos.map(p => `<li>${p.nombre} (${p.categoria}) - $${p.precio}</li>`).join('')}
+        </ul>
+      </div>`
+    ).join('');
+  }
+  modal.classList.remove('hidden');
+}
+function cerrarVentas() {
+  document.getElementById('modalVentas').classList.add('hidden');
+}
+
+// Mostrar sección actual en la barra superior
+function actualizarSeccionActual() {
+  const secciones = ["Electrónica", "Hogar", "Moda"];
+  const idx = document.activeElement.closest("section")?.querySelector("h2")?.textContent || "";
+  document.getElementById('seccionActual').textContent = idx ? "Sección: " + idx : "";
+}
+document.querySelectorAll("main section").forEach(sec => {
+  sec.addEventListener("mouseenter", actualizarSeccionActual);
+});

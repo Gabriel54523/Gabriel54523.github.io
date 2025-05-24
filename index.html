@@ -1,108 +1,126 @@
  <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tienda Online - Productos</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acciones Pedagógicas Interculturales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #eee;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    h2 {
+      color: #007BFF;
+    }
+
+    footer {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans">
-<!-- Barra superior de herramientas -->
-<nav class="w-full bg-white shadow flex flex-wrap items-center justify-between px-6 py-3 sticky top-0 z-50">
-  <div class="flex items-center gap-4">
-    <span class="font-bold text-blue-700">Herramientas:</span>
-    <select id="metodoPago" class="border rounded p-2">
-      <option value="tarjeta">Tarjeta</option>
-      <option value="paypal">PayPal</option>
-      <option value="efectivo">Efectivo</option>
-    </select>
-    <button onclick="verCarrito()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded ml-2">Ver Carrito</button>
-    <button onclick="verVentas()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded ml-2">Registro de Ventas</button>
-  </div>
-  <div>
-    <span id="seccionActual" class="text-gray-600"></span>
-  </div>
-  <header class="bg-blue-700 text-white py-6 mb-6 shadow">
-    <h1 class="text-3xl font-bold text-center">🛒 Tienda Online - Productos</h1>
+<body>
+
+  <header>
+    <h1>Acciones Pedagógicas Interculturales</h1>
+    <p>Una propuesta para una educación inclusiva en contextos diversos</p>
   </header>
 
-  <div class="flex max-w-7xl mx-auto">
-    <!-- Contenido principal -->
-    <main class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-      <!-- Sección 1 -->
-      <section>
-        <h2 class="text-xl font-semibold mb-4 text-blue-700">Electrónica</h2>
-        <div id="productos-electronica"></div>
-      </section>
-      <!-- Sección 2 -->
-      <section>
-        <h2 class="text-xl font-semibold mb-4 text-green-700">Hogar</h2>
-        <div id="productos-hogar"></div>
-      </section>
-      <!-- Sección 3 -->
-      <section>
-        <h2 class="text-xl font-semibold mb-4 text-pink-700">Moda</h2>
-        <div id="productos-moda"></div>
-      </section>
-    </main>
+  <nav>
+    <a href="#paso1">Paso 1</a>
+    <a href="#paso2">Paso 2</a>
+    <a href="#paso3">Paso 3</a>
+    <a href="#paso4">Paso 4</a>
+    <a href="#paso5">Paso 5</a>
+  </nav>
 
-    <!-- Barra lateral de herramientas -->
-    <aside class="min-w-[270px] max-w-xs bg-gray-100 border-l-2 border-gray-200 p-6 sticky top-0 h-screen shadow-md ml-4">
-      <div class="font-bold text-blue-700 mb-4 text-lg">Herramientas</div>
-      <form id="formAgregarProducto" class="mb-6">
-        <label for="nombre" class="font-semibold">Nombre:</label>
-        <input id="nombre" type="text" class="w-full border rounded p-2 mb-2" required>
-        <label for="precio" class="font-semibold">Precio:</label>
-        <input id="precio" type="number" class="w-full border rounded p-2 mb-2" required>
-        <label for="categoria" class="font-semibold">Categoría:</label>
-        <select id="categoria" class="w-full border rounded p-2 mb-2" required>
-          <option value="electronica">Electrónica</option>
-          <option value="hogar">Hogar</option>
-          <option value="moda">Moda</option>
-        </select>
-        <label for="imagen" class="font-semibold">Imagen:</label>
-        <input id="imagen" type="file" accept="image/*" class="w-full mb-2">
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">Agregar Producto</button>
-      </form>
-      <div>
-        <p class="font-semibold mb-2">Editar precio de producto:</p>
-        <input id="editId" type="number" placeholder="ID producto" class="w-full border rounded p-2 mb-2">
-        <input id="editPrecio" type="number" placeholder="Nuevo precio" class="w-full border rounded p-2 mb-2">
-        <button type="button" onclick="editarPrecio()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded">Editar Precio</button>
-      </div>
-    </aside>
-  </div>
-<!-- Modal Carrito -->
-<div id="modalCarrito" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-xl font-bold mb-4">Carrito</h2>
-    <div id="carritoContenido"></div>
-    <button onclick="cerrarCarrito()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar</button>
-  </div>
-</div>
-<!-- Modal Ventas -->
-<div id="modalVentas" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-xl font-bold mb-4">Registro de Ventas</h2>
-    <div id="ventasContenido"></div>
-    <button onclick="cerrarVentas()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar</button>
-  </div>
-</div><!-- Modal Carrito -->
-<div id="modalCarrito" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-xl font-bold mb-4">Carrito</h2>
-    <div id="carritoContenido"></div>
-    <button onclick="cerrarCarrito()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar</button>
-  </div>
-</div>
-<!-- Modal Ventas -->
-<div id="modalVentas" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-xl font-bold mb-4">Registro de Ventas</h2>
-    <div id="ventasContenido"></div>
-    <button onclick="cerrarVentas()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cerrar</button>
-  </div>
-</div>
-  <script src="app.js"></script>
+  <section id="paso1">
+    <h2>Paso 1: Introducción</h2>
+    <p>La diversidad cultural en Colombia se refleja en sus pueblos indígenas, afrodescendientes, campesinos y mestizos. Sin embargo, el sistema educativo ha tendido a ignorar estas culturas, generando tensiones y exclusiones.</p>
+    <p>Este documento tiene como propósito proponer acciones pedagógicas interculturales que respondan a los desafíos de contextos culturalmente diversos, promoviendo respeto, inclusión y diálogo de saberes.</p>
+    <p>Evaluar el impacto de estas acciones es crucial para garantizar su efectividad, sostenibilidad e influencia en la construcción de una educación equitativa y transformadora.</p>
+  </section>
+
+  <section id="paso2">
+    <h2>Paso 2: Descripción y análisis del contexto</h2>
+    <p><strong>Docentes:</strong> Reconocen la diversidad, pero carecen de formación intercultural.</p>
+    <p><strong>Estudiantes:</strong> Se sienten invisibilizados cuando sus lenguas y costumbres no se reflejan en clase.</p>
+    <p><strong>Comunidades:</strong> Perciben que la escuela impone valores ajenos y no valora sus saberes.</p>
+    <p>Los desafíos incluyen el etnocentrismo educativo, prácticas discriminatorias, desconocimiento de derechos culturales y currículos inflexibles. Las estrategias pedagógicas propuestas buscan revertir esta realidad mediante inclusión, reconocimiento y transformación estructural.</p>
+  </section>
+
+  <section id="paso3">
+    <h2>Paso 3: Evaluación del impacto social y educativo</h2>
+    <p>Las acciones propuestas permitirán:</p>
+    <ul>
+      <li>Fortalecer el respeto y la empatía entre estudiantes de distintas culturas.</li>
+      <li>Revalorizar los saberes ancestrales y promover la autoestima cultural.</li>
+      <li>Mejorar las prácticas docentes y rediseñar el currículo hacia la inclusión.</li>
+    </ul>
+    <p>Estas iniciativas impulsan el diálogo intercultural, fomentan la equidad educativa y promueven una escuela que reconozca todas las voces.</p>
+  </section>
+
+  <section id="paso4">
+    <h2>Paso 4: Aporte a los Objetivos de Desarrollo del Milenio (ODM)</h2>
+    <p>Las propuestas contribuyen directamente a los siguientes ODM:</p>
+    <ul>
+      <li><strong>ODM 2 – Educación universal:</strong> Al adaptar el currículo, se garantiza una educación accesible y relevante.</li>
+      <li><strong>ODM 10 – Reducción de desigualdades:</strong> Se disminuyen brechas educativas entre culturas.</li>
+      <li><strong>ODM 16 – Paz, justicia e instituciones sólidas:</strong> La inclusión fomenta una convivencia más armónica y participativa.</li>
+    </ul>
+    <p>Al transformar el contexto escolar desde lo intercultural, se promueve un desarrollo sostenible con justicia social.</p>
+  </section>
+
+  <section id="paso5">
+    <h2>Paso 5: Conclusiones</h2>
+    <p>La educación intercultural debe materializarse en prácticas que transformen el aula en un espacio de encuentro y respeto.</p>
+    <p>Este trabajo evidenció las tensiones del sistema educativo colombiano y propuso acciones concretas para avanzar hacia la inclusión cultural efectiva.</p>
+    <p>Se concluye que repensar el rol docente, rediseñar el currículo y vincular a las comunidades son pasos clave para construir una escuela verdaderamente intercultural y transformadora a largo plazo.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - UNAD | Curso Multiculturalidad e Interculturalidad</p>
+  </footer>
+
 </body>
 </html>

@@ -1,35 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><chritzzu class="net"></chritzzu></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoticiasHoy - Tu Portal de Noticias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f5f6fa;
+        }
+
+        body {
+            background-color: var(--background-color);
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .news-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .news-excerpt {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .date {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">NoticiasHoy</a>
+            <div class="nav-links">
+                <a href="#nacional">Nacional</a>
+                <a href="#internacional">Internacional</a>
+                <a href="#deportes">Deportes</a>
+                <a href="#tecnologia">Tecnología</a>
+                <a href="#cultura">Cultura</a>
+            </div>
+        </div>
+    </nav>
 
-  <h1>La vida es un viaje</h1>
-  <p>la vida y sus plenitudes hacen de cada instante una experiencia única y valiosa.</p>
+    <main class="main-content">
+        <section id="nacional" class="news-section">
+            <h2 class="section-title">Nacional</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Nacional" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Nueva política económica impulsa el crecimiento nacional</h3>
+                        <p class="news-excerpt">El gobierno anuncia medidas para fortalecer la economía y generar más empleos en el país.</p>
+                        <p class="date">15 de Abril, 2024</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Nacional" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Avances en infraestructura educativa</h3>
+                        <p class="news-excerpt">Se inauguran nuevas escuelas equipadas con tecnología de última generación.</p>
+                        <p class="date">14 de Abril, 2024</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-  <p>La vida es un viaje lleno de sorpresas y aprendizajes.</p>
-  <p>En cada paso que damos, descubrimos algo nuevo sobre nosotros mismos y el mundo que nos rodea.</p>
-  <p>Es importante disfrutar de cada momento y aprender de las experiencias que nos brinda.</p> 
-   
-  <div>
- <h1>opiniones de la vida en su maximo saber </h1>
- <p>La vida es un regalo que debemos apreciar y cuidar.</p>
- <p>Cada experiencia, ya sea buena o mala, nos enseña algo valioso.</p>
- <p>Es fundamental rodearnos de personas que nos inspiren y nos motiven a ser mejores.</p>
- <p>La felicidad se encuentra en las pequeñas cosas y en los momentos compartidos.</p>
- <p>Aprender a vivir en el presente nos permite disfrutar plenamente de la vida.</p>
+        <section id="internacional" class="news-section">
+            <h2 class="section-title">Internacional</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Internacional" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Cumbre mundial sobre cambio climático</h3>
+                        <p class="news-excerpt">Líderes mundiales se reúnen para discutir medidas contra el cambio climático.</p>
+                        <p class="date">15 de Abril, 2024</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Internacional" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Avances en la exploración espacial</h3>
+                        <p class="news-excerpt">Nueva misión espacial descubre evidencias de agua en Marte.</p>
+                        <p class="date">14 de Abril, 2024</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-<div class="net">
- <h1>Opiniones sobre la vida</h1>
- <p>La vida es un viaje que debemos disfrutar al máximo.</p>
- <p>Cada día es una nueva oportunidad para aprender y crecer.</p>
- <p>Es importante rodearnos de personas que nos apoyen y nos inspiren.</p>
- <p>La felicidad se encuentra en las pequeñas cosas de la vida.</p>
- <p>Aprender a vivir en el presente nos permite disfrutar plenamente de cada momento.</p>
-</div>
-
+        <section id="deportes" class="news-section">
+            <h2 class="section-title">Deportes</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Deportiva" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Final histórica en el campeonato nacional</h3>
+                        <p class="news-excerpt">Emocionante definición del torneo con récord de asistencia.</p>
+                        <p class="date">15 de Abril, 2024</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <img src="https://via.placeholder.com/400x200" alt="Noticia Deportiva" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">Nuevo récord mundial en atletismo</h3>
+                        <p class="news-excerpt">Atleta rompe marca histórica en competencia internacional.</p>
+                        <p class="date">14 de Abril, 2024</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>

@@ -1,263 +1,35 @@
- <!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Propuesta Intercultural - UNAD</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #003366;
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-    }
-
-    #selector {
-      margin: 20px auto;
-      text-align: center;
-    }
-
-    select {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    section {
-      background: white;
-      margin: 30px auto;
-      padding: 30px;
-      max-width: 1000px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: none;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    h2 {
-      color: #003366;
-    }
-
-    .quiz {
-      margin-top: 30px;
-      padding: 20px;
-      background: #eef4ff;
-      border: 1px solid #cce;
-      border-radius: 8px;
-    }
-
-    .question {
-      margin-bottom: 20px;
-    }
-
-    .feedback {
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #e0ffe0;
-      border: 1px solid #8f8;
-      border-radius: 5px;
-      display: none;
-    }
-
-    footer {
-      background-color: #003366;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><chritzzu class="net"></chritzzu></title>
 </head>
 <body>
 
-<header>
-  <h1>Acciones Pedagógicas Interculturales</h1>
-  <p>Seleccione una sección para visualizar el contenido y reforzar lo aprendido</p>
-</header>
+  <h1>La vida es un viaje</h1>
+  <p>la vida y sus plenitudes hacen de cada instante una experiencia única y valiosa.</p>
 
-<div id="selector">
-  <label for="seccion">Ir a sección: </label>
-  <select id="seccion" onchange="mostrarSeccion()">
-    <option value="">-- Elegir --</option>
-    <option value="paso1">Paso 1: Introducción</option>
-    <option value="paso2">Paso 2: Análisis del Contexto</option>
-    <option value="paso3">Paso 3: Evaluación del Impacto</option>
-    <option value="paso4">Paso 4: Aporte a los ODM</option>
-    <option value="paso5">Paso 5: Conclusiones</option>
-  </select>
+  <p>La vida es un viaje lleno de sorpresas y aprendizajes.</p>
+  <p>En cada paso que damos, descubrimos algo nuevo sobre nosotros mismos y el mundo que nos rodea.</p>
+  <p>Es importante disfrutar de cada momento y aprender de las experiencias que nos brinda.</p> 
+   
+  <div>
+ <h1>opiniones de la vida en su maximo saber </h1>
+ <p>La vida es un regalo que debemos apreciar y cuidar.</p>
+ <p>Cada experiencia, ya sea buena o mala, nos enseña algo valioso.</p>
+ <p>Es fundamental rodearnos de personas que nos inspiren y nos motiven a ser mejores.</p>
+ <p>La felicidad se encuentra en las pequeñas cosas y en los momentos compartidos.</p>
+ <p>Aprender a vivir en el presente nos permite disfrutar plenamente de la vida.</p>
+
+<div class="net">
+ <h1>Opiniones sobre la vida</h1>
+ <p>La vida es un viaje que debemos disfrutar al máximo.</p>
+ <p>Cada día es una nueva oportunidad para aprender y crecer.</p>
+ <p>Es importante rodearnos de personas que nos apoyen y nos inspiren.</p>
+ <p>La felicidad se encuentra en las pequeñas cosas de la vida.</p>
+ <p>Aprender a vivir en el presente nos permite disfrutar plenamente de cada momento.</p>
 </div>
-
-<section id="paso1">
-  <h2>Paso 1: Introducción</h2>
-  <p>Colombia es un país con gran diversidad cultural representada por pueblos indígenas, afrodescendientes, campesinos y comunidades mestizas.</p>
-  <p>El sistema educativo ha promovido prácticas homogéneas, invisibilizando las culturas originarias.</p>
-  <p>Esto genera tensiones, exclusiones y barreras para una educación equitativa.</p>
-  <p>Este documento propone acciones pedagógicas interculturales basadas en el respeto y la inclusión.</p>
-  <p>Se busca fomentar el diálogo de saberes y transformar las estructuras educativas.</p>
-  <p>La educación intercultural es clave para construir una sociedad justa y cohesionada.</p>
-  <p>Evaluar el impacto de las acciones pedagógicas permite medir su eficacia y sostenibilidad.</p>
-  <p>La propuesta tiene como propósito responder a los desafíos educativos en contextos diversos.</p>
-  <p>Se parte de la pregunta: ¿Cómo pueden las acciones pedagógicas transformar la educación en Colombia?</p>
-  <p>El análisis se presenta en formato digital para facilitar el acceso y la comprensión.</p>
-
-  <div class="quiz">
-    <h3>Refuerza lo aprendido</h3>
-    <div class="question">
-      <p><strong>1.</strong> ¿Cuál es la principal problemática abordada?</p>
-      <label><input type="radio" name="q1" value="a" onclick="evaluar('q1','b')"> La baja calidad de los contenidos matemáticos</label><br>
-      <label><input type="radio" name="q1" value="b" onclick="evaluar('q1','b')"> La homogenización del sistema educativo</label><br>
-      <label><input type="radio" name="q1" value="c" onclick="evaluar('q1','b')"> La escasez de tecnología</label>
-      <div id="feedback-q1" class="feedback"></div>
-    </div>
-    <div class="question">
-      <p><strong>2.</strong> ¿Qué objetivo tiene el documento?</p>
-      <label><input type="radio" name="q2" value="a" onclick="evaluar('q2','b')"> Reforzar el currículo nacional</label><br>
-      <label><input type="radio" name="q2" value="b" onclick="evaluar('q2','b')"> Proponer acciones pedagógicas interculturales</label><br>
-      <label><input type="radio" name="q2" value="c" onclick="evaluar('q2','b')"> Capacitar en herramientas digitales</label>
-      <div id="feedback-q2" class="feedback"></div>
-    </div>
-    <div class="question">
-      <p><strong>3.</strong> ¿Por qué es importante evaluar las acciones?</p>
-      <label><input type="radio" name="q3" value="a" onclick="evaluar('q3','b')"> Para cumplir requisitos institucionales</label><br>
-      <label><input type="radio" name="q3" value="b" onclick="evaluar('q3','b')"> Para garantizar eficacia y sostenibilidad</label><br>
-      <label><input type="radio" name="q3" value="c" onclick="evaluar('q3','b')"> Para comparar con otras escuelas</label>
-      <div id="feedback-q3" class="feedback"></div>
-    </div>
-  </div>
-</section>
-
-<section id="paso2">
-  <h2>Paso 2: Análisis del Contexto</h2>
-  <p>El contexto social y cultural es fundamental para diseñar acciones pedagógicas adecuadas.</p>
-  <p>Es necesario entender las particularidades de cada comunidad para respetar sus valores y saberes.</p>
-  <p>Las políticas educativas deben ser flexibles y adaptarse a la diversidad existente.</p>
-  <p>El análisis del contexto ayuda a identificar las barreras y oportunidades en el entorno educativo.</p>
-
-  <div class="quiz">
-    <h3>Refuerza lo aprendido</h3>
-    <div class="question">
-      <p><strong>1.</strong> ¿Por qué es importante analizar el contexto cultural?</p>
-      <label><input type="radio" name="q4" value="a" onclick="evaluar('q4','b')"> Para imponer un modelo único de enseñanza</label><br>
-      <label><input type="radio" name="q4" value="b" onclick="evaluar('q4','b')"> Para respetar valores y saberes propios</label><br>
-      <label><input type="radio" name="q4" value="c" onclick="evaluar('q4','b')"> Para reducir la diversidad cultural</label>
-      <div id="feedback-q4" class="feedback"></div>
-    </div>
-    <div class="question">
-      <p><strong>2.</strong> ¿Qué deben hacer las políticas educativas?</p>
-      <label><input type="radio" name="q5" value="a" onclick="evaluar('q5','b')"> Ser flexibles y adaptarse a la diversidad</label><br>
-      <label><input type="radio" name="q5" value="b" onclick="evaluar('q5','b')"> Aplicar las mismas reglas para todos</label><br>
-      <label><input type="radio" name="q5" value="c" onclick="evaluar('q5','b')"> Fomentar la homogeneización</label>
-      <div id="feedback-q5" class="feedback"></div>
-    </div>
-  </div>
-</section>
-
-<section id="paso3">
-  <h2>Paso 3: Evaluación del Impacto</h2>
-  <p>Evaluar el impacto permite saber si las acciones pedagógicas están logrando los objetivos planteados.</p>
-  <p>Se deben usar indicadores claros y medibles para esta evaluación.</p>
-  <p>La participación de la comunidad educativa es clave en este proceso.</p>
-  <p>Los resultados ayudan a mejorar y ajustar las estrategias implementadas.</p>
-
-  <div class="quiz">
-    <h3>Refuerza lo aprendido</h3>
-    <div class="question">
-      <p><strong>1.</strong> ¿Qué se necesita para evaluar el impacto?</p>
-      <label><input type="radio" name="q6" value="a" onclick="evaluar('q6','b')"> Indicadores claros y medibles</label><br>
-      <label><input type="radio" name="q6" value="b" onclick="evaluar('q6','b')"> Opiniones sin fundamento</label><br>
-      <label><input type="radio" name="q6" value="c" onclick="evaluar('q6','b')"> Ignorar la comunidad educativa</label>
-      <div id="feedback-q6" class="feedback"></div>
-    </div>
-    <div class="question">
-      <p><strong>2.</strong> ¿Quién debe participar en la evaluación?</p>
-      <label><input type="radio" name="q7" value="a" onclick="evaluar('q7','b')"> Solo los administradores</label><br>
-      <label><input type="radio" name="q7" value="b" onclick="evaluar('q7','b')"> La comunidad educativa completa</label><br>
-      <label><input type="radio" name="q7" value="c" onclick="evaluar('q7','b')"> Solo los estudiantes</label>
-      <div id="feedback-q7" class="feedback"></div>
-    </div>
-  </div>
-</section>
-
-<section id="paso4">
-  <h2>Paso 4: Aporte a los ODM</h2>
-  <p>Las acciones pedagógicas interculturales contribuyen al cumplimiento de los Objetivos de Desarrollo del Milenio (ODM).</p>
-  <p>Favorecen la inclusión, la igualdad y el acceso a una educación de calidad.</p>
-  <p>Promueven la valoración de la diversidad cultural como recurso para el desarrollo sostenible.</p>
-  <p>Estas acciones fortalecen el compromiso con metas globales para mejorar la vida de las comunidades.</p>
-
-  <div class="quiz">
-    <h3>Refuerza lo aprendido</h3>
-    <div class="question">
-      <p><strong>1.</strong> ¿Qué contribuyen las acciones pedagógicas interculturales?</p>
-      <label><input type="radio" name="q8" value="a" onclick="evaluar('q8','b')"> Al aumento de la tecnología</label><br>
-      <label><input type="radio" name="q8" value="b" onclick="evaluar('q8','b')"> Al cumplimiento de los ODM</label><br>
-      <label><input type="radio" name="q8" value="c" onclick="evaluar('q8','b')"> A la reducción de la diversidad cultural</label>
-      <div id="feedback-q8" class="feedback"></div>
-    </div>
-    <div class="question">
-      <p><strong>2.</strong> ¿Qué promueven estas acciones pedagógicas?</p>
-      <label><input type="radio" name="q9" value="a" onclick="evaluar('q9','b')"> La valoración de la diversidad cultural</label><br>
-      <label><input type="radio" name="q9" value="b" onclick="evaluar('q9','b')"> La homogeneización del currículo</label><br>
-      <label><input type="radio" name="q9" value="c" onclick="evaluar('q9','b')"> La exclusión social</label>
-      <div id="feedback-q9" class="feedback"></div>
-    </div>
-  </div>
-</section>
-
-<section id="paso5">
-  <h2>Paso 5: Conclusiones</h2>
-  <p>Las acciones pedagógicas interculturales son fundamentales para transformar la educación y promover la equidad.</p>
-  <p>El reconocimiento y respeto por la diversidad cultural fortalecen la convivencia y el desarrollo social.</p>
-  <p>Se recomienda seguir evaluando y ajustando las estrategias para asegurar resultados sostenibles.</p>
-  <p>El compromiso de todos los actores educativos es vital para lograr una educación inclusiva y de calidad.</p>
-</section>
-
-<footer>
-  <p>UNAD – Licenciatura en Etnoeducación | Estudiante: Dency Esperanza Chaparro Bohórquez | Mayo 2025</p>
-</footer>
-
-<script>
-  function mostrarSeccion() {
-    const secciones = document.querySelectorAll("section");
-    secciones.forEach(sec => sec.classList.remove("active"));
-    const seleccion = document.getElementById("seccion").value;
-    if (seleccion) {
-      document.getElementById(seleccion).classList.add("active");
-    }
-  }
-
-  function evaluar(preguntaId, correcta) {
-    const opciones = document.getElementsByName(preguntaId);
-    let seleccion = null;
-    for (let i = 0; i < opciones.length; i++) {
-      if (opciones[i].checked) {
-        seleccion = opciones[i].value;
-        break;
-      }
-    }
-    const feedback = document.getElementById("feedback-" + preguntaId);
-    if (seleccion === correcta) {
-      feedback.style.display = "block";
-      feedback.style.backgroundColor = "#e0ffe0";
-      feedback.innerText = "✅ ¡Respuesta correcta!";
-    } else {
-      feedback.style.display = "block";
-      feedback.style.backgroundColor = "#ffe0e0";
-      feedback.innerText = "❌ Respuesta incorrecta. Inténtalo de nuevo.";
-    }
-  }
-</script>
 
 </body>
 </html>

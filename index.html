@@ -1,257 +1,50 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoticiasHoy - Tu Portal de Noticias</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        :root {
-            --primary-color: #1a237e;
-            --secondary-color: #304ffe;
-            --background-color: #f5f5f5;
-            --text-color: #333;
-            --accent-color: #ff4081;
-        }
-
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-        }
-
-        .nav-links a:hover {
-            background-color: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 6rem auto 2rem;
-            padding: 0 1rem;
-        }
-
-        .news-section {
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section-title {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 1rem;
-        }
-
-        .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 5px;
-            background: var(--accent-color);
-            border-radius: 5px;
-        }
-
-        .news-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .news-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .news-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .news-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .news-content {
-            padding: 1.5rem;
-        }
-
-        .news-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .news-excerpt {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .date {
-            color: #888;
-            font-size: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+ <link rel="stylesheet" href="static/style.css">
+ <script src="static/script.js" defer></script>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">NoticiasHoy</a>
-            <div class="nav-links">
-                <a href="#nacional">Nacional</a>
-                <a href="#internacional">Internacional</a>
-                <a href="#deportes">Deportes</a>
-                <a href="#tecnologia">Tecnología</a>
-                <a href="#cultura">Cultura</a>
-            </div>
-        </div>
-    </nav>
+ <header>
+  <h1>Gabriel's Portfolio</h1>
+  <nav>
+   <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+   </ul>
+  </nav>
+ </header>
 
-    <main class="main-content">
-        <section id="nacional" class="news-section">
-            <h2 class="section-title">Nacional</h2>
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="imagenes/Captura de pantalla_10-6-2025_13372_www.bing.com.jpeg" alt="Noticia Nacional" class="news-image">
-                    <div class="news-content">
-                        <h3 class="news-title">Nueva política económica impulsa el crecimiento nacional</h3>
-                        <p class="news-excerpt">El gobierno anuncia medidas para fortalecer la economía y generar más empleos en el país.</p>
-                        <p class="date">15 de Abril, 2024</p>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Noticia Nacional" class="news-image">
-                    <div class="news-content">
-                        <h3 class="news-title">Avances en infraestructura educativa</h3>
-                        <p class="news-excerpt">Se inauguran nuevas escuelas equipadas con tecnología de última generación.</p>
-                        <p class="date">14 de Abril, 2024</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+ <main>
+  <section id="about">
+   <h2>About Me</h2>
+   <p>Welcome to my portfolio! I'm Gabriel, a passionate developer with a love for creating innovative solutions.</p>
+  </section>
 
-        <section id="internacional" class="news-section">
-            <h2 class="section-title">Internacional</h2>
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Noticia Internacional" class="news-image">
-                    <div class="news-content">
-                        <h3 class="news-title">Cumbre mundial sobre cambio climático</h3>
-                        <p class="news-excerpt">Líderes mundiales se reúnen para discutir medidas contra el cambio climático.</p>
-                        <p class="date">15 de Abril, 2024</p>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Noticia Internacional" class="news-image">
-                    <div class="news-content">
-                        <h3 class="news-title">Avances en la exploración espacial</h3>
-                        <p class="news-excerpt">Nueva misión espacial descubre evidencias de agua en Marte.</p>
-                        <p class="date">14 de Abril, 2024</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+  <section id="projects">
+   <h2>My Projects</h2>
+   <ul>
+    <li>
+     <h3>Project 1</h3>
+     <p>Description of project 1.</p>
+    </li>
+    <li>
+     <h3>Project 2</h3>
+     <p>Description of project 2.</p>
+    </li>
+   </ul>
+  </section>
 
-        <section id="deportes" class="news-section">
-            <h2 class="section-title">Deportes</h2>
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Noticia Deportiva" class="news-image">
-                    <div class="news-content">
-                         <img src="imagenes/Captura de pantalla_10-6-2025_13372_www.bing.com.jpeg" alt="">
-                        <h3 class="news-title">Final histórica en el campeonato nacional</h3>
-                        <p class="news-excerpt">Emocionante definición del torneo con récord de asistencia.</p>
-                        <p class="date">15 de Abril, 2024</p>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <img src="https://via.placeholder.com/400x200" alt="Noticia Deportiva" class="news-image">
-                    <div class="news-content">
-                        <h3 class="news-title">Nuevo récord mundial en atletismo</h3>
-                        <p class="news-excerpt">Atleta rompe marca histórica en competencia internacional.</p>
-                        <p class="date">14 de Abril, 2024</p>
-                    </div>
-                </article>
-</div>
-        </section>
-    </main>
+  <section id="contact">
+   <h2>Contact Me</h2>
+   <p>If you'd like to get in touch, feel free to reach out!</p>
+  </section>
+ </main>
+
+ <footer>
+  <p>&copy; 2023 Gabriel. All rights reserved.</p>
+ </footer>
 </body>
+
 </html>
